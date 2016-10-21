@@ -26,24 +26,24 @@ namespace Forms_Multipage_Generator {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("650")]
-        public int Left_Right_LabelPosition {
+        public int Left_Right_LabelPositionA {
             get {
-                return ((int)(this["Left_Right_LabelPosition"]));
+                return ((int)(this["Left_Right_LabelPositionA"]));
             }
             set {
-                this["Left_Right_LabelPosition"] = value;
+                this["Left_Right_LabelPositionA"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("170")]
-        public int Bottom_Top_LabelPosition {
+        public int Bottom_Top_LabelPositionA {
             get {
-                return ((int)(this["Bottom_Top_LabelPosition"]));
+                return ((int)(this["Bottom_Top_LabelPositionA"]));
             }
             set {
-                this["Bottom_Top_LabelPosition"] = value;
+                this["Bottom_Top_LabelPositionA"] = value;
             }
         }
         
@@ -56,6 +56,30 @@ namespace Forms_Multipage_Generator {
             }
             set {
                 this["Text_Spacing"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("650")]
+        public int Left_Right_LabelPositionB {
+            get {
+                return ((int)(this["Left_Right_LabelPositionB"]));
+            }
+            set {
+                this["Left_Right_LabelPositionB"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("170")]
+        public int Bottom_Top_LabelPositionB {
+            get {
+                return ((int)(this["Bottom_Top_LabelPositionB"]));
+            }
+            set {
+                this["Bottom_Top_LabelPositionB"] = value;
             }
         }
     }

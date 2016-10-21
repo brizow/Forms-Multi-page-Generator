@@ -26,9 +26,11 @@ namespace Forms_Multipage_Generator
             string title = titleTextBox.Text;
             string address = addressTextBox.Text;
             string citystzip = cityStZipTextBox.Text;
-            int leftrightpos = AppSettings.Default.Left_Right_LabelPosition;
-            int bottomtoppos = AppSettings.Default.Bottom_Top_LabelPosition;
+            int leftrightposA = AppSettings.Default.Left_Right_LabelPositionA;
+            int bottomtopposA = AppSettings.Default.Bottom_Top_LabelPositionA;
             int linespacing = AppSettings.Default.Text_Spacing;
+            int leftrightposB = AppSettings.Default.Left_Right_LabelPositionB;
+            int bottomtopposB = AppSettings.Default.Bottom_Top_LabelPositionB;
 
             if (numOPgsTextBox.Text != "")
             {
@@ -41,7 +43,8 @@ namespace Forms_Multipage_Generator
                     //create however many pages we ask
                     for (int i = 0; i < numberofpages; i++)
                     {
-                        if (i == 0)
+                        //even pages - Template A
+                        if (i % 2 == 0)
                         {
                             //first page get the address label
                             PdfPage pdfPage = pdf.AddPage();
@@ -51,19 +54,35 @@ namespace Forms_Multipage_Generator
                             //page width in pixels: 792
                             //page height in pixels: 612
                             //0,0 top left, 792,612 bottom right 
-                            graph.DrawString(title, font, XBrushes.Black, new Point(leftrightpos, bottomtoppos));
-                            graph.DrawString(address, font, XBrushes.Black, new Point(leftrightpos, bottomtoppos + linespacing));
-                            graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightpos, bottomtoppos + linespacing + linespacing));
+                            graph.DrawString(title, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA));
+                            graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing));
+                            graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing));
                         }
-                        else
+                        //odd pages - Template B
+                        if (i % 2 == 1)
                         {
-                            //create however many more "blank" pages
+                            //first page get the address label
                             PdfPage pdfPage = pdf.AddPage();
                             pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
                             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-                            XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
-                            graph.DrawString("", font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
+                            XFont font = new XFont("helvetica narrow", 10); //XFontStyle.Bold
+                            //page width in pixels: 792
+                            //page height in pixels: 612
+                            //0,0 top left, 792,612 bottom right 
+                            graph.DrawString(title, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB));
+                            graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing));
+                            graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing));
                         }
+                        //Now I need to account for the blank pages....
+                        //else
+                        //{
+                        //    //create however many more "blank" pages
+                        //    PdfPage pdfPage = pdf.AddPage();
+                        //    pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
+                        //    XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+                        //    XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
+                        //    graph.DrawString("", font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
+                        //}
                     }
                     string pdfFilename = title + ".pdf";
                     pdf.Save(pdfFilename);
@@ -90,8 +109,10 @@ namespace Forms_Multipage_Generator
             panel1.Hide();
             settingsPanel.Show();
             //load any settings that were saved
-            leftRightPosNum.Value = AppSettings.Default.Left_Right_LabelPosition;
-            bottomTopPosNum.Value = AppSettings.Default.Bottom_Top_LabelPosition;
+            leftRightPosNumA.Value = AppSettings.Default.Left_Right_LabelPositionA;
+            bottomTopPosNumA.Value = AppSettings.Default.Bottom_Top_LabelPositionA;
+            leftRightPosNumB.Value = AppSettings.Default.Left_Right_LabelPositionB;
+            bottomTopPosNumB.Value = AppSettings.Default.Bottom_Top_LabelPositionB;
             textSpacingNum.Value = AppSettings.Default.Text_Spacing;
         }
 
@@ -104,8 +125,11 @@ namespace Forms_Multipage_Generator
         #region settings
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            AppSettings.Default.Left_Right_LabelPosition = Convert.ToInt32(leftRightPosNum.Value);
-            AppSettings.Default.Bottom_Top_LabelPosition = Convert.ToInt32(bottomTopPosNum.Value);
+            //save the settings back to AppSettings
+            AppSettings.Default.Left_Right_LabelPositionA = Convert.ToInt32(leftRightPosNumA.Value);
+            AppSettings.Default.Bottom_Top_LabelPositionA = Convert.ToInt32(bottomTopPosNumA.Value);
+            AppSettings.Default.Left_Right_LabelPositionB = Convert.ToInt32(leftRightPosNumB.Value);
+            AppSettings.Default.Bottom_Top_LabelPositionB = Convert.ToInt32(bottomTopPosNumB.Value);
             AppSettings.Default.Text_Spacing = Convert.ToInt32(textSpacingNum.Value);
             settingsPanel.Hide();
             panel1.Show();
