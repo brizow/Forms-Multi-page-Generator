@@ -65,8 +65,9 @@ namespace Forms_Multipage_Generator
                             graph.DrawString("", font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
                         }
                     }
-                    string pdfFilename = title;
+                    string pdfFilename = title + ".pdf";
                     pdf.Save(pdfFilename);
+                    //opening the saved file
                     Process.Start(pdfFilename);
                 }
                 catch (Exception ex)
@@ -86,6 +87,7 @@ namespace Forms_Multipage_Generator
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            panel1.Hide();
             settingsPanel.Show();
             //load any settings that were saved
             leftRightPosNum.Value = AppSettings.Default.Left_Right_LabelPosition;
@@ -106,6 +108,7 @@ namespace Forms_Multipage_Generator
             AppSettings.Default.Bottom_Top_LabelPosition = Convert.ToInt32(bottomTopPosNum.Value);
             AppSettings.Default.Text_Spacing = Convert.ToInt32(textSpacingNum.Value);
             settingsPanel.Hide();
+            panel1.Show();
         }
         #endregion
     }

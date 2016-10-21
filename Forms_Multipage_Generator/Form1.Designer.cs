@@ -30,14 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.titleTextBox = new System.Windows.Forms.TextBox();
-            this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.cityStZipTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numOPgsTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,16 +48,26 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textSpacingNum = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.numOPgsTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cityStZipTextBox = new System.Windows.Forms.TextBox();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
+            this.titleTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.settingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leftRightPosNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bottomTopPosNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textSpacingNum)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(136, 185);
+            this.button1.Location = new System.Drawing.Point(104, 134);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -73,78 +75,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(103, 51);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Title";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(85, 85);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Address";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(56, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "City, State, Zip";
-            // 
-            // titleTextBox
-            // 
-            this.titleTextBox.Location = new System.Drawing.Point(136, 48);
-            this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(179, 20);
-            this.titleTextBox.TabIndex = 4;
-            // 
-            // addressTextBox
-            // 
-            this.addressTextBox.Location = new System.Drawing.Point(136, 82);
-            this.addressTextBox.Name = "addressTextBox";
-            this.addressTextBox.Size = new System.Drawing.Size(179, 20);
-            this.addressTextBox.TabIndex = 5;
-            // 
-            // cityStZipTextBox
-            // 
-            this.cityStZipTextBox.Location = new System.Drawing.Point(136, 115);
-            this.cityStZipTextBox.Name = "cityStZipTextBox";
-            this.cityStZipTextBox.Size = new System.Drawing.Size(179, 20);
-            this.cityStZipTextBox.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 146);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Number of pages:";
-            // 
-            // numOPgsTextBox
-            // 
-            this.numOPgsTextBox.Location = new System.Drawing.Point(136, 143);
-            this.numOPgsTextBox.MaxLength = 4;
-            this.numOPgsTextBox.Name = "numOPgsTextBox";
-            this.numOPgsTextBox.Size = new System.Drawing.Size(58, 20);
-            this.numOPgsTextBox.TabIndex = 8;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(367, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(368, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -160,14 +97,14 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -193,7 +130,7 @@
             this.settingsPanel.Location = new System.Drawing.Point(11, 27);
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(344, 222);
-            this.settingsPanel.TabIndex = 10;
+            this.settingsPanel.TabIndex = 0;
             this.settingsPanel.Visible = false;
             // 
             // label7
@@ -234,7 +171,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(8, 196);
+            this.saveBtn.Location = new System.Drawing.Point(7, 193);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 11;
@@ -345,25 +282,98 @@
             this.label12.TabIndex = 18;
             this.label12.Text = "Pixels";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.numOPgsTextBox);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.cityStZipTextBox);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.addressTextBox);
+            this.panel1.Controls.Add(this.titleTextBox);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(12, 27);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(343, 175);
+            this.panel1.TabIndex = 0;
+            // 
+            // numOPgsTextBox
+            // 
+            this.numOPgsTextBox.Location = new System.Drawing.Point(104, 108);
+            this.numOPgsTextBox.MaxLength = 4;
+            this.numOPgsTextBox.Name = "numOPgsTextBox";
+            this.numOPgsTextBox.Size = new System.Drawing.Size(58, 20);
+            this.numOPgsTextBox.TabIndex = 16;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 111);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Number of pages:";
+            // 
+            // cityStZipTextBox
+            // 
+            this.cityStZipTextBox.Location = new System.Drawing.Point(104, 80);
+            this.cityStZipTextBox.Name = "cityStZipTextBox";
+            this.cityStZipTextBox.Size = new System.Drawing.Size(179, 20);
+            this.cityStZipTextBox.TabIndex = 14;
+            // 
+            // addressTextBox
+            // 
+            this.addressTextBox.Location = new System.Drawing.Point(104, 47);
+            this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.Size = new System.Drawing.Size(179, 20);
+            this.addressTextBox.TabIndex = 13;
+            // 
+            // titleTextBox
+            // 
+            this.titleTextBox.Location = new System.Drawing.Point(104, 13);
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.Size = new System.Drawing.Size(179, 20);
+            this.titleTextBox.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 83);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "City, State, Zip";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(53, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Address";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(71, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Title";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 261);
+            this.ClientSize = new System.Drawing.Size(368, 261);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.settingsPanel);
-            this.Controls.Add(this.numOPgsTextBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.cityStZipTextBox);
-            this.Controls.Add(this.addressTextBox);
-            this.Controls.Add(this.titleTextBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Multipage Maker";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.settingsPanel.ResumeLayout(false);
@@ -371,6 +381,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.leftRightPosNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bottomTopPosNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textSpacingNum)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,14 +391,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox titleTextBox;
-        private System.Windows.Forms.TextBox addressTextBox;
-        private System.Windows.Forms.TextBox cityStZipTextBox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox numOPgsTextBox;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
@@ -405,6 +409,15 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown textSpacingNum;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox numOPgsTextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox cityStZipTextBox;
+        private System.Windows.Forms.TextBox addressTextBox;
+        private System.Windows.Forms.TextBox titleTextBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
