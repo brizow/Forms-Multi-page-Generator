@@ -373,7 +373,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Multipage Maker";
+            this.Text = "Multi-page Maker";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.settingsPanel.ResumeLayout(false);
