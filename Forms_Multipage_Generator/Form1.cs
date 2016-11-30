@@ -18,19 +18,25 @@ namespace Forms_Multipage_Generator
         public Form1()
         {
             InitializeComponent();
-        }
 
-        private void button1_Click(object sender, EventArgs e)
+            leftRightPosNumA.Value = AppSettings.Default.Left_Right_LabelPositionA;
+            bottomTopPosNumA.Value = AppSettings.Default.Bottom_Top_LabelPositionA;
+            leftRightPosNumB.Value = AppSettings.Default.Left_Right_LabelPositionB;
+            bottomTopPosNumB.Value = AppSettings.Default.Bottom_Top_LabelPositionB;
+            textSpacingNum.Value = AppSettings.Default.Text_Spacing;
+        }
+        #region createPDF
+        private void createPDFBtn_Click(object sender, EventArgs e)
         {
             int numberofpages = 0;
             string title = titleTextBox.Text;
             string address = addressTextBox.Text;
             string citystzip = cityStZipTextBox.Text;
-            int leftrightposA = AppSettings.Default.Left_Right_LabelPositionA;
-            int bottomtopposA = AppSettings.Default.Bottom_Top_LabelPositionA;
-            int linespacing = AppSettings.Default.Text_Spacing;
-            int leftrightposB = AppSettings.Default.Left_Right_LabelPositionB;
-            int bottomtopposB = AppSettings.Default.Bottom_Top_LabelPositionB;
+            int leftrightposA = Convert.ToInt32(leftRightPosNumA.Value);
+            int bottomtopposA = Convert.ToInt32(bottomTopPosNumA.Value);
+            int linespacing = Convert.ToInt32(textSpacingNum.Value);
+            int leftrightposB = Convert.ToInt32(leftRightPosNumB.Value);
+            int bottomtopposB = Convert.ToInt32(bottomTopPosNumB.Value);
 
             if (numOPgsTextBox.Text != "")
             {
@@ -99,23 +105,10 @@ namespace Forms_Multipage_Generator
                 MessageBox.Show("Please enter the number of pages.");
             }
         }
-
+        #endregion
 
         #region toolbar
         //toolbar items
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            panel1.Hide();
-            settingsPanel.Show();
-            //load any settings that were saved
-            leftRightPosNumA.Value = AppSettings.Default.Left_Right_LabelPositionA;
-            bottomTopPosNumA.Value = AppSettings.Default.Bottom_Top_LabelPositionA;
-            leftRightPosNumB.Value = AppSettings.Default.Left_Right_LabelPositionB;
-            bottomTopPosNumB.Value = AppSettings.Default.Bottom_Top_LabelPositionB;
-            textSpacingNum.Value = AppSettings.Default.Text_Spacing;
-        }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -123,7 +116,7 @@ namespace Forms_Multipage_Generator
         #endregion
 
         #region settings
-        private void saveBtn_Click(object sender, EventArgs e)
+        private void saveSetBtn_Click(object sender, EventArgs e)
         {
             //save the settings back to AppSettings
             AppSettings.Default.Left_Right_LabelPositionA = Convert.ToInt32(leftRightPosNumA.Value);
@@ -131,8 +124,7 @@ namespace Forms_Multipage_Generator
             AppSettings.Default.Left_Right_LabelPositionB = Convert.ToInt32(leftRightPosNumB.Value);
             AppSettings.Default.Bottom_Top_LabelPositionB = Convert.ToInt32(bottomTopPosNumB.Value);
             AppSettings.Default.Text_Spacing = Convert.ToInt32(textSpacingNum.Value);
-            settingsPanel.Hide();
-            panel1.Show();
+            MessageBox.Show("App settings have been saved.");
         }
         #endregion
     }
