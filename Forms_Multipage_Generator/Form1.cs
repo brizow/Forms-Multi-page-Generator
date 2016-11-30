@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,10 +91,24 @@ namespace Forms_Multipage_Generator
                         //    graph.DrawString("", font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
                         //}
                     }
-                    string pdfFilename = title + ".pdf";
-                    pdf.Save(pdfFilename);
-                    //opening the saved file
-                    Process.Start(pdfFilename);
+
+                    //save method
+                    SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                    saveFileDialog1.Title = "Save File";
+                    saveFileDialog1.FileName = title;
+                    saveFileDialog1.CheckFileExists = false;
+                    saveFileDialog1.CheckPathExists = true;
+                    saveFileDialog1.DefaultExt = "pdf";
+                    saveFileDialog1.Filter = "Pdf files (*.pdf)|*.pdf|All files (*.*)|*.*";
+                    saveFileDialog1.FilterIndex = 1;
+                    saveFileDialog1.RestoreDirectory = true;
+
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        pdf.Save(saveFileDialog1.FileName);
+                        //open the saved file
+                        Process.Start(saveFileDialog1.FileName);
+                    }
                 }
                 catch (Exception ex)
                 {
