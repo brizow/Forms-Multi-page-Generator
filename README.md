@@ -9,7 +9,3 @@ of concept turned production app.
 Basically what this does is craete an address label of sorts on a page. The 
 number of pages is controlled by you. In this case we needed 625 pages with 
 address labels on every page except the one listed in the blank pages text box.
-
-Even pages are Template A
-Odd pages are Template B
-Blank pages must be numbers seperated by commas only. 
