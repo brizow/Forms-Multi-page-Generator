@@ -59,6 +59,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.custIDTextBox = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -72,8 +74,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.custIDTextBox = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label24 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.settingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bottomTopPosNumB)).BeginInit();
@@ -82,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bottomTopPosNumA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftRightPosNumA)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // createPDFBtn
@@ -99,7 +102,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(883, 24);
@@ -448,7 +452,6 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.custIDTextBox);
             this.panel1.Controls.Add(this.label23);
-            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.label20);
             this.panel1.Controls.Add(this.pageBlanksTextBox);
@@ -466,10 +469,29 @@
             this.panel1.Size = new System.Drawing.Size(454, 381);
             this.panel1.TabIndex = 0;
             // 
+            // custIDTextBox
+            // 
+            this.custIDTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.custIDTextBox.Location = new System.Drawing.Point(135, 46);
+            this.custIDTextBox.Name = "custIDTextBox";
+            this.custIDTextBox.Size = new System.Drawing.Size(269, 22);
+            this.custIDTextBox.TabIndex = 0;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(48, 49);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(81, 16);
+            this.label23.TabIndex = 33;
+            this.label23.Text = "Customer ID";
+            // 
             // panel2
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.Location = new System.Drawing.Point(334, 291);
+            this.panel2.Controls.Add(this.label24);
+            this.panel2.Location = new System.Drawing.Point(758, 323);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(115, 85);
             this.panel2.TabIndex = 31;
@@ -502,8 +524,11 @@
             this.pageBlanksTextBox.MaxLength = 1000;
             this.pageBlanksTextBox.Multiline = true;
             this.pageBlanksTextBox.Name = "pageBlanksTextBox";
-            this.pageBlanksTextBox.Size = new System.Drawing.Size(269, 53);
+            this.pageBlanksTextBox.Size = new System.Drawing.Size(269, 96);
             this.pageBlanksTextBox.TabIndex = 5;
+            this.pageBlanksTextBox.Text = "Comma seperated values only.";
+            this.pageBlanksTextBox.Enter += new System.EventHandler(this.pageBlanksTextBox_Enter);
+            this.pageBlanksTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pageBlanksTextBox_KeyPress);
             // 
             // numOPgsTextBox
             // 
@@ -520,9 +545,9 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(17, 198);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 16);
+            this.label4.Size = new System.Drawing.Size(117, 16);
             this.label4.TabIndex = 15;
-            this.label4.Text = "Number of pages";
+            this.label4.Text = "Number of pages*";
             // 
             // cityStZipTextBox
             // 
@@ -574,27 +599,25 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(95, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 16);
+            this.label1.Size = new System.Drawing.Size(39, 16);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Title";
+            this.label1.Text = "Title*";
             // 
-            // custIDTextBox
+            // helpToolStripMenuItem
             // 
-            this.custIDTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.custIDTextBox.Location = new System.Drawing.Point(135, 46);
-            this.custIDTextBox.Name = "custIDTextBox";
-            this.custIDTextBox.Size = new System.Drawing.Size(269, 22);
-            this.custIDTextBox.TabIndex = 0;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
-            // label23
+            // label24
             // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(48, 49);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(81, 16);
-            this.label23.TabIndex = 33;
-            this.label23.Text = "Customer ID";
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(81, 72);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(34, 13);
+            this.label24.TabIndex = 32;
+            this.label24.Text = "v: 1.1";
             // 
             // Form1
             // 
@@ -602,6 +625,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(883, 420);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.settingsPanel);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -619,6 +643,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.leftRightPosNumA)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -670,6 +696,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TextBox custIDTextBox;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.Label label24;
     }
 }
 

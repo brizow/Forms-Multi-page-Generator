@@ -16,6 +16,8 @@ namespace Forms_Multipage_Generator
 {
     public partial class Form1 : Form
     {
+        string[] blankPagesArray = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +28,23 @@ namespace Forms_Multipage_Generator
             bottomTopPosNumB.Value = AppSettings.Default.Bottom_Top_LabelPositionB;
             textSpacingNum.Value = AppSettings.Default.Text_Spacing;
         }
+
+        #region functions
+        private void pageBlanksTextBox_Enter(object sender, EventArgs e)
+        {
+            pageBlanksTextBox.Clear();
+        }
+
+        //only accept commas and numbers
+        private void pageBlanksTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+        }
+
+        #endregion
 
         #region createPDF
         private void createPDFBtn_Click(object sender, EventArgs e)
@@ -40,8 +59,19 @@ namespace Forms_Multipage_Generator
             int linespacing = Convert.ToInt32(textSpacingNum.Value);
             int leftrightposB = Convert.ToInt32(leftRightPosNumB.Value);
             int bottomtopposB = Convert.ToInt32(bottomTopPosNumB.Value);
-            //get blank pages
-            string[] blankPagesArray = pageBlanksTextBox.Text.Split(new Char[] { ',' });
+            //get blank pages from textbox, catch if box is blank or prepopulated
+            if (pageBlanksTextBox.Text != "")
+            {
+                if(pageBlanksTextBox.Text.Contains("Comma "))
+                {
+                    //do nothing
+                }
+                else
+                {
+                    blankPagesArray = pageBlanksTextBox.Text.Split(new Char[] { ',' });
+                }  
+            }
+
 
             if (numOPgsTextBox.Text != "")
             {
@@ -54,18 +84,22 @@ namespace Forms_Multipage_Generator
                     //create however many pages we ask
                     for (int i = 1; i <= numberofpages; i++)
                     {
-                        foreach (var b in blankPagesArray)
+                        //if the array is not blank
+                        if (blankPagesArray != null)
                         {
-                            if (i == Convert.ToInt32(b))
+                            foreach (var b in blankPagesArray)
                             {
-                                //increment i because we added a blank page.
-                                i++;
-                                //create however many more "blank" pages
-                                PdfPage pdfPage = pdf.AddPage();
-                                pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
-                                XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-                                XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
-                                graph.DrawString("", font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
+                                if (i == Convert.ToInt32(b))
+                                {
+                                    //increment i because we added a blank page.
+                                    i++;
+                                    //create however many more "blank" pages
+                                    PdfPage pdfPage = pdf.AddPage();
+                                    pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
+                                    XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+                                    XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
+                                    graph.DrawString("", font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
+                                }
                             }
                         }
 
@@ -138,6 +172,18 @@ namespace Forms_Multipage_Generator
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("HelpDoc.mht");
+            }
+            catch
+            {
+                MessageBox.Show("Looks like the help text is missing.");
+            }
         }
         #endregion
 
