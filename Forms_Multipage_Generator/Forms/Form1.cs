@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,9 @@ namespace Forms_Multipage_Generator
 {
     public partial class Form1 : Form
     {
+        //global vars
         string[] blankPagesArray = null;
+        PdfDocument pdf = new PdfDocument();
 
         public Form1()
         {
@@ -49,11 +52,14 @@ namespace Forms_Multipage_Generator
         #region createPDF
         private void createPDFBtn_Click(object sender, EventArgs e)
         {
-            int numberofpages = 0;
-            string customerID = custIDTextBox.Text;
-            string title = titleTextBox.Text;
-            string address = addressTextBox.Text;
-            string citystzip = cityStZipTextBox.Text;
+            //init variables
+            blankPagesArray = null;
+            pdf = new PdfDocument();
+            int numberofpages = Convert.ToInt32(numOPgsTextBox.Text);
+            string customerID = ConvertTo_ProperCase(custIDTextBox.Text);
+            string title = ConvertTo_ProperCase(titleTextBox.Text);
+            string address = ConvertTo_ProperCase(addressTextBox.Text);
+            string citystzip = ConvertTo_ProperCase(cityStZipTextBox.Text);
             int leftrightposA = Convert.ToInt32(leftRightPosNumA.Value);
             int bottomtopposA = Convert.ToInt32(bottomTopPosNumA.Value);
             int linespacing = Convert.ToInt32(textSpacingNum.Value);
@@ -62,14 +68,14 @@ namespace Forms_Multipage_Generator
             //get blank pages from textbox, catch if box is blank or prepopulated
             if (pageBlanksTextBox.Text != "")
             {
-                if(pageBlanksTextBox.Text.Contains("Comma "))
+                if (pageBlanksTextBox.Text.Contains("Comma "))
                 {
                     //do nothing
                 }
                 else
                 {
                     blankPagesArray = pageBlanksTextBox.Text.Split(new Char[] { ',' });
-                }  
+                }
             }
 
 
@@ -77,64 +83,54 @@ namespace Forms_Multipage_Generator
             {
                 try
                 {
-                    numberofpages = Convert.ToInt32(numOPgsTextBox.Text);
-                    PdfDocument pdf = new PdfDocument();
                     pdf.Info.Title = title;
 
                     //create however many pages we ask
-                    for (int i = 1; i <= numberofpages; i++)
+                    for (int i = 1; i <= numberofpages; i++) //something is happening when we specify the last page as blank. It always creates one extra page. I believe it is going through the loop twice instead of stopping.
                     {
                         //if the array is not blank
                         if (blankPagesArray != null)
                         {
-                            foreach (var b in blankPagesArray)
+
+                            if (createBlankPage(i) == false)
                             {
-                                if (i == Convert.ToInt32(b))
+                                //even pages - Template A
+                                if (i % 2 == 0)
                                 {
-                                    //increment i because we added a blank page.
-                                    i++;
-                                    //create however many more "blank" pages
+                                    //first page get the address label
                                     PdfPage pdfPage = pdf.AddPage();
                                     pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
                                     XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-                                    XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
-                                    graph.DrawString("", font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
+                                    XFont font = new XFont("helvetica narrow", 10); //XFontStyle.Bold
+                                                                                    //page width in pixels: 792
+                                                                                    //page height in pixels: 612
+                                                                                    //0,0 top left, 792,612 bottom right 
+                                    graph.DrawString(customerID, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA));
+                                    graph.DrawString(title, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing));
+                                    graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing));
+                                    graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
                                 }
+                                //odd pages - Template B
+                                if (i % 2 == 1)
+                                {
+                                    //first page get the address label
+                                    PdfPage pdfPage = pdf.AddPage();
+                                    pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
+                                    XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+                                    XFont font = new XFont("helvetica narrow", 10); //XFontStyle.Bold
+                                                                                    //page width in pixels: 792
+                                                                                    //page height in pixels: 612
+                                                                                    //0,0 top left, 792,612 bottom right 
+                                    graph.DrawString(customerID, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB));
+                                    graph.DrawString(title, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing));
+                                    graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing));
+                                    graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing + linespacing));
+                                }
+
                             }
+
                         }
 
-                        //even pages - Template A
-                        if (i % 2 == 0)
-                        {
-                            //first page get the address label
-                            PdfPage pdfPage = pdf.AddPage();
-                            pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
-                            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-                            XFont font = new XFont("helvetica narrow", 10); //XFontStyle.Bold
-                            //page width in pixels: 792
-                            //page height in pixels: 612
-                            //0,0 top left, 792,612 bottom right 
-                            graph.DrawString(customerID, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA));
-                            graph.DrawString(title, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing));
-                            graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing));
-                            graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
-                        }
-                        //odd pages - Template B
-                        if (i % 2 == 1)
-                        {
-                            //first page get the address label
-                            PdfPage pdfPage = pdf.AddPage();
-                            pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
-                            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-                            XFont font = new XFont("helvetica narrow", 10); //XFontStyle.Bold
-                            //page width in pixels: 792
-                            //page height in pixels: 612
-                            //0,0 top left, 792,612 bottom right 
-                            graph.DrawString(customerID, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB));
-                            graph.DrawString(title, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing));
-                            graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing));
-                            graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing + linespacing));
-                        }
                     }
 
                     //save method
@@ -165,6 +161,31 @@ namespace Forms_Multipage_Generator
                 MessageBox.Show("Please enter the number of pages.");
             }
         }
+
+        private bool createBlankPage(int i)
+        {
+            foreach (var b in blankPagesArray)
+            {
+                if (i == Convert.ToInt32(b))
+                {
+                    //create however many more "blank" pages
+                    PdfPage pdfPage = pdf.AddPage();
+                    pdfPage.Orientation = PdfSharp.PageOrientation.Landscape;
+                    XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+                    XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
+                    graph.DrawString("", font, XBrushes.Black, new XRect(0, 0, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.Center);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static string ConvertTo_ProperCase(string text)
+        {
+            TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+            return myTI.ToTitleCase(text.ToLower());
+        }
+
         #endregion
 
         #region toolbar
@@ -199,6 +220,11 @@ namespace Forms_Multipage_Generator
             MessageBox.Show("App settings have been saved.");
         }
         #endregion
+
+        private void label24_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

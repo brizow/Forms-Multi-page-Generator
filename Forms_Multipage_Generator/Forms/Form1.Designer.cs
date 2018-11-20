@@ -34,6 +34,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.settingsPanel = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
@@ -61,7 +62,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.custIDTextBox = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.pageBlanksTextBox = new System.Windows.Forms.TextBox();
@@ -73,9 +73,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.settingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bottomTopPosNumB)).BeginInit();
@@ -124,6 +124,13 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -487,15 +494,6 @@
             this.label23.TabIndex = 33;
             this.label23.Text = "Customer ID";
             // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.Controls.Add(this.label24);
-            this.panel2.Location = new System.Drawing.Point(758, 323);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(115, 85);
-            this.panel2.TabIndex = 31;
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -603,12 +601,14 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Title*";
             // 
-            // helpToolStripMenuItem
+            // panel2
             // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Controls.Add(this.label24);
+            this.panel2.Location = new System.Drawing.Point(758, 323);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(115, 85);
+            this.panel2.TabIndex = 31;
             // 
             // label24
             // 
@@ -617,7 +617,8 @@
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(34, 13);
             this.label24.TabIndex = 32;
-            this.label24.Text = "v: 1.1";
+            this.label24.Text = "v: 1.2";
+            this.label24.Click += new System.EventHandler(this.label24_Click);
             // 
             // Form1
             // 
