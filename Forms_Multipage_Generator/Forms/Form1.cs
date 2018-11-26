@@ -1,16 +1,9 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Forms_Multipage_Generator
@@ -25,11 +18,11 @@ namespace Forms_Multipage_Generator
         {
             InitializeComponent();
 
-            leftRightPosNumA.Value = AppSettings.Default.Left_Right_LabelPositionA;
-            bottomTopPosNumA.Value = AppSettings.Default.Bottom_Top_LabelPositionA;
-            leftRightPosNumB.Value = AppSettings.Default.Left_Right_LabelPositionB;
-            bottomTopPosNumB.Value = AppSettings.Default.Bottom_Top_LabelPositionB;
-            textSpacingNum.Value = AppSettings.Default.Text_Spacing;
+            leftRightPosNumA.Value = Properties.Settings.Default.Left_Right_LabelPositionA;
+            bottomTopPosNumA.Value = Properties.Settings.Default.Bottom_Top_LabelPositionA;
+            leftRightPosNumB.Value = Properties.Settings.Default.Left_Right_LabelPositionB;
+            bottomTopPosNumB.Value = Properties.Settings.Default.Bottom_Top_LabelPositionB;
+            textSpacingNum.Value = Properties.Settings.Default.Text_Spacing;
         }
 
         #region functions
@@ -56,10 +49,12 @@ namespace Forms_Multipage_Generator
             blankPagesArray = null;
             pdf = new PdfDocument();
             int numberofpages = Convert.ToInt32(numOPgsTextBox.Text);
-            string customerID = ConvertTo_ProperCase(custIDTextBox.Text);
-            string title = ConvertTo_ProperCase(titleTextBox.Text);
-            string address = ConvertTo_ProperCase(addressTextBox.Text);
-            string citystzip = ConvertTo_ProperCase(cityStZipTextBox.Text);
+            string customerID = "." + custIDTextBox.Text;
+            //add period to front
+            string title = titleTextBox.Text;
+            string address = addressTextBox.Text;
+            string address2 = address2TextBox.Text;
+            string citystzip = cityStZipTextBox.Text;
             int leftrightposA = Convert.ToInt32(leftRightPosNumA.Value);
             int bottomtopposA = Convert.ToInt32(bottomTopPosNumA.Value);
             int linespacing = Convert.ToInt32(textSpacingNum.Value);
@@ -78,7 +73,6 @@ namespace Forms_Multipage_Generator
                 }
             }
 
-
             if (numOPgsTextBox.Text != "")
             {
                 try
@@ -86,7 +80,7 @@ namespace Forms_Multipage_Generator
                     pdf.Info.Title = title;
 
                     //create however many pages we ask
-                    for (int i = 1; i <= numberofpages; i++) //something is happening when we specify the last page as blank. It always creates one extra page. I believe it is going through the loop twice instead of stopping.
+                    for (int i = 1; i <= numberofpages; i++)
                     {
                         //if the array is not blank
                         if (blankPagesArray != null)
@@ -108,7 +102,16 @@ namespace Forms_Multipage_Generator
                                     graph.DrawString(customerID, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA));
                                     graph.DrawString(title, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing));
                                     graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing));
-                                    graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
+                                    if(address2 != "")
+                                    {
+                                        graph.DrawString(address2, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
+                                        graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing + linespacing));
+                                    }
+                                    else
+                                    {
+                                        graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
+                                    }
+                                    
                                 }
                                 //odd pages - Template B
                                 if (i % 2 == 1)
@@ -124,7 +127,15 @@ namespace Forms_Multipage_Generator
                                     graph.DrawString(customerID, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB));
                                     graph.DrawString(title, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing));
                                     graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing));
-                                    graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing + linespacing));
+                                    if (address2 != "")
+                                    {
+                                        graph.DrawString(address2, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
+                                        graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing + linespacing));
+                                    }
+                                    else
+                                    {
+                                        graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
+                                    }
                                 }
 
                             }
@@ -212,19 +223,15 @@ namespace Forms_Multipage_Generator
         private void saveSetBtn_Click(object sender, EventArgs e)
         {
             //save the settings back to AppSettings
-            AppSettings.Default.Left_Right_LabelPositionA = Convert.ToInt32(leftRightPosNumA.Value);
-            AppSettings.Default.Bottom_Top_LabelPositionA = Convert.ToInt32(bottomTopPosNumA.Value);
-            AppSettings.Default.Left_Right_LabelPositionB = Convert.ToInt32(leftRightPosNumB.Value);
-            AppSettings.Default.Bottom_Top_LabelPositionB = Convert.ToInt32(bottomTopPosNumB.Value);
-            AppSettings.Default.Text_Spacing = Convert.ToInt32(textSpacingNum.Value);
+            Properties.Settings.Default.Left_Right_LabelPositionA = Convert.ToInt32(leftRightPosNumA.Value);
+            Properties.Settings.Default.Bottom_Top_LabelPositionA = Convert.ToInt32(bottomTopPosNumA.Value);
+            Properties.Settings.Default.Left_Right_LabelPositionB = Convert.ToInt32(leftRightPosNumB.Value);
+            Properties.Settings.Default.Bottom_Top_LabelPositionB = Convert.ToInt32(bottomTopPosNumB.Value);
+            Properties.Settings.Default.Text_Spacing = Convert.ToInt32(textSpacingNum.Value);
+            Properties.Settings.Default.Save();
             MessageBox.Show("App settings have been saved.");
         }
         #endregion
-
-        private void label24_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 
