@@ -129,12 +129,12 @@ namespace Forms_Multipage_Generator
                                     graph.DrawString(address, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing));
                                     if (address2 != "")
                                     {
-                                        graph.DrawString(address2, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
-                                        graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing + linespacing));
+                                        graph.DrawString(address2, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing + linespacing));
+                                        graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing + linespacing + linespacing));
                                     }
                                     else
                                     {
-                                        graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposA, bottomtopposA + linespacing + linespacing + linespacing));
+                                        graph.DrawString(citystzip, font, XBrushes.Black, new Point(leftrightposB, bottomtopposB + linespacing + linespacing + linespacing));
                                     }
                                 }
 
@@ -232,6 +232,11 @@ namespace Forms_Multipage_Generator
             MessageBox.Show("App settings have been saved.");
         }
         #endregion
+
+        private void pageBlanksTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
